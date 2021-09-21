@@ -34,12 +34,18 @@ const columns=[
                 onRowUpdate:(newRow,oldRow)=>new Promise((resolve,reject)=>{
                     
                     const updatedData=[...tableData]
-                    console.log(oldRow.tableData.id)
                     updatedData[oldRow.tableData.id]=newRow
                     setTableData(updatedData)
                     setTimeout(()=>resolve(),500)
+                }),
+                onRowDelete:(selectedRow)=>new Promise((resolve,reject)=>{
+                    const updatedData=[...tableData]
+                    updatedData.splice(selectedRow.tableData.id,1)
+                    setTableData(updatedData)
+                    setTimeout(()=>resolve(),1000)
                 })
             }}
+
             options={{
                 exportButton:true,
                 addRowPosition:'first',
